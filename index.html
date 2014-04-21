@@ -1,7 +1,59 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Rich Interactive Narratives</title>
+
+    <!-- local styles -->
+    <style type="text/css">
+        html, body, #rinPlayer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: none;
+            -webkit-touch-callout: none;
+            -ms-content-zooming: none;
+        }
+    </style>
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.easing.1.3.js"></script>
+    <script src="lib/jquery.pxtouch.min.js"></script>
+    <script src="lib/knockout-2.2.1.js"></script>
+    <script src="lib/rin-core-1.0.js"></script>
+    <script src="lib/HelloWorldExperience.js"></script>
+
+    <script>
+        rin.processAll().then(function () {
+            var narrativeId = document.location.search || "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
+            if (narrativeId && narrativeId.length > 0 && narrativeId[0] == "?") {
+                narrativeId = narrativeId.substr(1);
+            }
+
+            var playerElement = document.getElementById("rinPlayer");
+            var configuration = new rin.PlayerConfiguration();
+            configuration.hideAllControllers = false; //true;
+
+            var playerControl = rin.createPlayerControl(playerElement, configuration)
+            playerControl.load(narrativeId);
+            playerElement.rinPlayer = playerControl;
+        });
+    </script>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div id="rinPlayer" class="rinPlayer" style="width: 100%;height: 100%;margin: 0;padding: 0;overflow: hidden;"></div>
 </body>
+
 </html>

@@ -1,0 +1,121 @@
+﻿.sidebarTitle {
+    margin-bottom: 5px;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    color: white;
+}
+
+.sidebar {
+    position: absolute;
+    right: 0px;
+    width: 25%;
+    height: 100%;
+    top: 0px;
+    font-family: 'Segoe UI';
+    background: rgba(0, 0, 0, 0.66);
+    padding: 30px 10px 200px 20px;
+    color: rgba(255,255,255,.9);
+    font-size: 1em;
+    border-left: 1px solid rgba(255,255,255,.3);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sidebarCLoseButton {
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: rgba(255,255,255,.15);
+    background-image: url('../images/next.jpg');
+    background-size: 48px 48px;
+    opacity: .8;
+    cursor: pointer;
+}
+
+    .sidebarCLoseButton:hover {
+        opacity: 1;
+    }
+
+.sidebarThumbnailImage {
+    transition: .5s all ease;
+    height: 88px;
+    width: 88px;
+    background: white;
+    float: left;
+    display: block;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    border: 2px solid #333;
+}
+
+    .sidebarThumbnailImage:hover {
+        border: 2px solid white;
+    }
+
+    .sidebarThumbnailImage > img {
+        height: 100%;
+        width: 100%;
+    }
+
+.sidebarRelatedArticle {
+    transition: .5s background ease;
+    display: block;
+    padding: 3px 10px 5px 7px;
+    background: rgba(255,255,255,.07);
+    margin-bottom: 1px;
+    text-decoration: none;
+    color: #cbcbcb;
+}
+
+    .sidebarRelatedArticle:hover {
+        color: white;
+        background: rgba(255,255,255,.2);
+    }
+
+@-webkit-keyframes pulsate {
+    0% {
+        -webkit-transform: scale(0.7, 0.7);
+    }
+
+    70% {
+        -webkit-transform: scale(1, 1);
+    }
+
+    100% {
+        -webkit-transform: scale(0.7, 0.7);
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        -ms-transform: scale(0.7, 0.7);
+    }
+
+    70% {
+        -ms-transform: scale(1, 1);
+    }
+
+    100% {
+        -ms-transform: scale(0.7, 0.7);
+    }
+}
+
+.bingSquareArtifact {
+    /*animation: pulsate 3s infinite;
+    -webkit-animation: pulsate 3s infinite;
+    -webkit-transform-origin:center;*/
+    cursor: pointer;
+    background-image: url('../images/bingSquare.png');
+    background-size: auto;
+    background-attachment:local;
+    background-repeat: no-repeat;    
+    position: absolute;
+    opacity: .8;
+    height: 100%;
+    width: 100%;
+}
