@@ -14,10 +14,11 @@
     <script src="lib/knockout-2.2.1.js"></script>
     <script src="lib/rin-core-1.0.js"></script>
     <script src="lib/HelloWorldExperience.js"></script>
+    <script src="lib/SampleImageES.js"></script>
     <script src="lib/beautify.js"></script>
     <script>
         rin.processAll().then(function () {
-            var narrativeId = document.location.search || "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
+            var narrativeId = document.location.search || "SampleImageRin/narrative.js&jsonpcallback=narrativeJson";
             if (narrativeId && narrativeId.length > 0 && narrativeId[0] == "?") {
                 narrativeId = narrativeId.substr(1);
             }
