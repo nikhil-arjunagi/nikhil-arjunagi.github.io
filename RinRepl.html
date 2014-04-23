@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" style="width:100%;">
+<head>
+    <title>RIN Repl</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Rich Interactive Narratives</title>
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.easing.1.3.js"></script>
+    <script src="lib/jquery.pxtouch.min.js"></script>
+    <script src="lib/knockout-2.2.1.js"></script>
+    <script src="lib/rin-core-1.0.js"></script>
+    <script src="lib/HelloWorldExperience.js"></script>
+    <script src="lib/beautify.js"></script>
+    <script>
+        rin.processAll().then(function () {
+            var narrativeId = document.location.search || "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
+            if (narrativeId && narrativeId.length > 0 && narrativeId[0] == "?") {
+                narrativeId = narrativeId.substr(1);
+            }
+
+            var playerElement = document.getElementById("rinPlayer");
+            var configuration = new rin.PlayerConfiguration();
+            configuration.hideAllControllers = false; //true;
+
+            var playerControl = rin.createPlayerControl(playerElement, configuration)
+            playerControl.load(narrativeId);
+            playerElement.rinPlayer = playerControl;
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var btnLoad = $("#btnLoad")[0];
+            btnLoad.onclick = function () {
+                var userRin = $("#txtArea").val();
+                var userRinJson = rin.util.parseJSON(userRin);
+                var rinPlayer = rin.getPlayerControl(document.getElementById('rinPlayer'));
+                rinPlayer.loadData(userRinJson);
+            }
+        });
+    </script>
+</head>
+<body style="width:100%;">
+    <div id="rinPlayer" class="rinPlayer"></div>
+    <div id="left" class="left">
+        <textarea id="txtArea" style="width:98%; height:95%"></textarea>
+        <div style="margin:5px; float:right;">
+            <input id="btnLoad" type="button" value="Load" />
+            <input id="btnReset" type="button" value="Reset" />
+        </div>
+    </div>
+</body>
+</html>
