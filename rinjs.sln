@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30129.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "nikhil-arjunagi.github.io", "http://localhost:40305", "{BFC6E03C-407D-4BD4-B1D3-D3953827882A}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_40305"
+		Debug.AspNetCompiler.PhysicalPath = "..\nikhil-arjunagi.github.io\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_40305\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_40305"
+		Release.AspNetCompiler.PhysicalPath = "..\nikhil-arjunagi.github.io\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_40305\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\nikhil-arjunagi.github.io\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFC6E03C-407D-4BD4-B1D3-D3953827882A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC6E03C-407D-4BD4-B1D3-D3953827882A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
