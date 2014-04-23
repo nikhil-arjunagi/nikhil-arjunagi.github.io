@@ -24,10 +24,8 @@
             }
 
             var playerElement = document.getElementById("rinPlayer");
-            var configuration = new rin.PlayerConfiguration();
-            configuration.hideAllControllers = false; //true;
 
-            var playerControl = rin.createPlayerControl(playerElement, configuration)
+            var playerControl = rin.createPlayerControl(playerElement, {autoplay: true, controls: true, loop: true });
             playerControl.load(narrativeId);
             playerElement.rinPlayer = playerControl;
         });
