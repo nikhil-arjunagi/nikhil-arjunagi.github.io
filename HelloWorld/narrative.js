@@ -28,6 +28,7 @@
             "HelloWorldExperienceStream": {
                 "providerId": "HelloWorldExperienceProvider",
                 "data": {
+                    "message": "A simple experience provider! ",
                     "transition": {
                         "providerId": "MicrosoftResearch.Rin.FadeInOutTransitionService",
                         "inDuration": 2,
