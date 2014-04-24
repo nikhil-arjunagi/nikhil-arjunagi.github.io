@@ -17,14 +17,20 @@
     <script src="lib/SampleImageES.js"></script>
     <script src="lib/beautify.js"></script>
     <script>
-        rin.processAll().then(function () {
-            var narrativeId = document.location.search || "SampleImageRin/narrative.js&jsonpcallback=narrativeJson";
-            if (narrativeId && narrativeId.length > 0 && narrativeId[0] == "?") {
+        this.defaultId = "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
+        var getNarrativeId = function() {
+            var narrativeId = document.location.search || this.defaultId;
+            if (narrativeId && narrativeId.length > 0 && narrativeId[0] === "?") {
                 narrativeId = narrativeId.substr(1);
             }
 
-            var playerElement = document.getElementById("rinPlayer");
+            return narrativeId;
+        }
 
+        rin.processAll().then(function () {
+            narrativeId = getNarrativeId();
+
+            var playerElement = document.getElementById("rinPlayer");
             var playerControl = rin.createPlayerControl(playerElement, {autoplay: true, controls: true, loop: true });
             playerControl.load(narrativeId);
             playerElement.rinPlayer = playerControl;
@@ -39,13 +45,46 @@
                 var rinPlayer = rin.getPlayerControl(document.getElementById('rinPlayer'));
                 rinPlayer.loadData(userRinJson);
             }
+
+            var btnReset = $("#btnReset")[0];
+            btnReset.onclick = function() {
+                window.location.reload(false);
+            }
+
+            ko.observableArray.fn.find = function (prop, data) {
+                var valueToMatch = data[prop];
+                return ko.utils.arrayFirst(this(), function (item) {
+                    return item[prop] === valueToMatch;
+                });
+            };
+
+            function ViewModel(choices, choice) {
+                this.choices = ko.observableArray(choices);
+                this.choice = ko.observable(this.choices.find("id", choice));
+            };
+
+            var choices = [
+                    { id: "HelloWorld/narrative.js&jsonpcallback=narrativeJson", name: "Hello World" },
+                    { id: "SampleImageRin/narrative.js&jsonpcallback=narrativeJson", name: "Discrete keyframes" }
+            ];
+
+            var narrativeId = getNarrativeId();
+            var choice = $.grep(choices, function (e) { return e.id == narrativeId; })[0];
+            var viewModel = new ViewModel(choices, choice);
+            viewModel.choice.subscribe(function (newValue) {
+                window.location.href = "http://" + window.location.host + window.location.pathname + '?' + newValue.id;
+            });
+
+            ko.applyBindings(viewModel);
         });
     </script>
 </head>
 <body style="width:100%;">
     <div id="rinPlayer" class="rinPlayer"></div>
     <div id="left" class="left">
-        <textarea id="txtArea" style="width:98%; height:95%"></textarea>
+        <select data-bind="options: choices, optionsText: 'name', value: choice"
+                 style="margin:5px; float:right;"></select>
+        <textarea id="txtArea" style="width:98%; height:90%"></textarea>
         <div style="margin:5px; float:right;">
             <input id="btnLoad" type="button" value="Load" />
             <input id="btnReset" type="button" value="Reset" />
