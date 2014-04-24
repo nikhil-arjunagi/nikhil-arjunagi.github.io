@@ -18,7 +18,7 @@
     <script src="lib/beautify.js"></script>
     <script>
         this.defaultId = "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
-        var getNarrativeId = function() {
+        var getNarrativeId = function () {
             var narrativeId = document.location.search || this.defaultId;
             if (narrativeId && narrativeId.length > 0 && narrativeId[0] === "?") {
                 narrativeId = narrativeId.substr(1);
@@ -27,27 +27,52 @@
             return narrativeId;
         }
 
+        var hideErrorMsg = function() {
+            var errorMsgCtrl = $("#errorMsg")[0];
+            errorMsgCtrl.style.display = 'none';
+        }
+
+        var showErrorMsg = function (error) {
+            var span = document.getElementById('errorMsg');
+            span.style.display = 'inline';
+            while (span.firstChild) {
+                span.removeChild(span.firstChild);
+            }
+
+            span.appendChild(document.createTextNode(error));
+        }
+
         rin.processAll().then(function () {
             narrativeId = getNarrativeId();
 
             var playerElement = document.getElementById("rinPlayer");
-            var playerControl = rin.createPlayerControl(playerElement, {autoplay: true, controls: true, loop: true });
+            var playerControl = rin.createPlayerControl(playerElement, { autoplay: true, controls: true, loop: false });
             playerControl.load(narrativeId);
             playerElement.rinPlayer = playerControl;
+            hideErrorMsg();
         });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
             var btnLoad = $("#btnLoad")[0];
             btnLoad.onclick = function () {
-                var userRin = $("#txtArea").val();
-                var userRinJson = rin.util.parseJSON(userRin);
+                hideErrorMsg();
                 var rinPlayer = rin.getPlayerControl(document.getElementById('rinPlayer'));
-                rinPlayer.loadData(userRinJson);
+                var userRin = $("#txtArea").val();
+                var userRinJson = [];
+                try {
+                    var userRinJson = rin.util.parseJSON(userRin);
+                    rinPlayer.loadData(userRinJson);
+                }
+                catch (e) {
+                    showErrorMsg(e);
+                    rinPlayer.pause();
+                }
             }
 
             var btnReset = $("#btnReset")[0];
-            btnReset.onclick = function() {
+            btnReset.onclick = function () {
+                hideErrorMsg();
                 window.location.reload(false);
             }
 
@@ -82,13 +107,22 @@
 <body style="width:100%;">
     <div id="rinPlayer" class="rinPlayer"></div>
     <div id="left" class="left">
-        <select data-bind="options: choices, optionsText: 'name', value: choice"
-                 style="margin:5px; float:right;"></select>
-        <textarea id="txtArea" style="width:98%; height:90%"></textarea>
+        <div style="padding-bottom: 15px; padding-left: 15px; padding-top: 15px; padding-right:5px;">
+            <span style="font-size: 85%; float: left; width: 75%;"><p>You can use this REPL to play around with some of our sample narratives.</p><p>Use the dropdown box to select the example you would like to understand and edit. Make your edits and click load to see the changes take affect. Click Reset to reset the narrative to the original state.</p></span>
+            <select data-bind="options: choices, optionsText: 'name', value: choice"
+                    style="float:right; margin-top:12px;"></select>
+            
+        </div>
+        <textarea id="txtArea" style="width:98%; height:80%; margin: 5px;"></textarea>
         <div style="margin:5px; float:right;">
             <input id="btnLoad" type="button" value="Load" />
             <input id="btnReset" type="button" value="Reset" />
         </div>
+        <span id="errorMsg" class="errorMsg" style="padding: 5px; font-size: 75%; color: red; margin-top: 50px; display:none;"></span>
+        <br />
+        <span style="padding: 5px; font-size: 75%; color: lightslategray; margin-top: 50px;">You can find more information about RIN <a href="http://www.rinjs.org" target="_blank">here</a>.</span>
+        <br />
+        <span style="padding: 5px; font-size: 75%; color: lightslategray;">Formal specification of the constructs you see in the RIN xml can be found <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=170526" target="_blank">here</a>.</span>
     </div>
 </body>
 </html>
