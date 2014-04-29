@@ -13,9 +13,13 @@
     <script src="lib/jquery.pxtouch.min.js"></script>
     <script src="lib/knockout-2.2.1.js"></script>
     <script src="lib/rin-core-1.0.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0" type="text/javascript"></script>
+    <script src="lib/pano-viewer.js"></script>
+    <script src="lib/seadragon-0.8.9-rin.js" type="text/javascript"></script>
+    <script src="lib/beautify.js"></script>
+
     <script src="lib/HelloWorldExperience.js"></script>
     <script src="lib/SampleImageES.js"></script>
-    <script src="lib/beautify.js"></script>
     <script>
         this.defaultId = "HelloWorld/narrative.js&jsonpcallback=narrativeJson";
         var getNarrativeId = function () {
@@ -90,7 +94,9 @@
 
             var choices = [
                     { id: "HelloWorld/narrative.js&jsonpcallback=narrativeJson", name: "Hello World" },
-                    { id: "SampleImageRin/narrative.js&jsonpcallback=narrativeJson", name: "Discrete keyframes" }
+                    { id: "SampleImageRin/narrative.js&jsonpcallback=narrativeJson", name: "Discrete keyframes" },
+                    { id: "intro/narrative.js&jsonpcallback=narrativeJson", name: "Tourism" },
+                    { id: "Video/narrative.js", name: "A college tour" }
             ];
 
             var narrativeId = getNarrativeId();
@@ -122,7 +128,7 @@
         <br />
         <span style="padding: 5px; font-size: 75%; color: lightslategray; margin-top: 50px;">You can find more information about RIN <a href="http://www.rinjs.org" target="_blank">here</a>.</span>
         <br />
-        <span style="padding: 5px; font-size: 75%; color: lightslategray;">Formal specification of the constructs you see in the RIN xml can be found <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=170526" target="_blank">here</a>.</span>
+        <span style="padding: 5px; font-size: 75%; color: lightslategray;">Formal specification of the constructs you see in the RIN JSON can be found <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=170526" target="_blank">here</a>. A shorter version is <a href="http://rinjs.org/rin-data-model/" target="_blank">here</a>.</span>
     </div>
 </body>
 </html>
